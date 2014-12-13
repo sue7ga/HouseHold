@@ -18,7 +18,6 @@ sub postincome{
  $param->add('total',$total);
  $param->add('user_id',$c->session->get('userid'));
  $param->remove('XSRF-TOKEN');
- print Dumper $param;
  $c->db->insert_income($param);
  return $c->redirect('/income');
 }
@@ -30,10 +29,22 @@ sub expense{
 
 sub postexpense{
  my($class,$c) = @_;
- print Dumper $c->req->parameters;
+ my $param = $c->req->parameters;
+ my $total = 0;
+ for (qw/food good fare society entertainment teaching dress clinic communicate water living car tax large_consume other/){
+  $total += $param->{$_};
+ }
+ $param->add('total',$total);
+ $param->add('user_id',$c->session->get('userid'));
+ $param->remove('XSRF-TOKEN');
+ $c->db->insert_expense($param);
  return $c->redirect('/expense');
 }
 
+sub expense_analytics{
+ my ($class,$c) = @_;
+ return $c->render('analytics_expense.tx');
+}
 
 sub register{
  my($class,$c) = @_;

@@ -20,6 +20,12 @@ table{
 };
 
 table{
+ name 'expense';
+ pk 'id';
+ columns qw(id food good fare society entertainment teaching dress clinic communicate water living car tax large_consume other user_id date total balance);
+};
+
+table{
  name 'user';
  pk 'id'; 
  columns qw(id email name password sex);

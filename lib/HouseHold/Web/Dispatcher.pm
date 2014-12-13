@@ -31,4 +31,7 @@ get '/analytics' => "HouseHold#analytics";
 
 post '/post/analytics' => "HouseHold#postanalytics";
 
+get '/expense/analytics' => "HouseHold#expense_analytics";
+
+
 1;

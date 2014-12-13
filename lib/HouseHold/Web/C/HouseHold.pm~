@@ -16,6 +16,7 @@ sub postincome{
    $total += $param->{$_};
  }
  $param->add('total',$total);
+ $param->add('user_id',$c->session->get('userid'));
  $param->remove('XSRF-TOKEN');
  print Dumper $param;
  $c->db->insert_income($param);
@@ -29,7 +30,14 @@ sub expense{
 
 sub postexpense{
  my($class,$c) = @_;
- print Dumper $c->req->parameters;
+ my $param = $c->req->parameters;
+ my $total = 0;
+ for (qw/food good fare society entertainment teaching dress clinic communicate water living car tax large_consume other/){
+  $total += $param->{$_};
+ }
+ $param->add('total',$total);
+ $param->add('user_id',$c->session->get('userid'));
+ $param->remove('XSRF-TOKEN');
  return $c->redirect('/expense');
 }
 
@@ -58,9 +66,33 @@ sub userlogin{
  my($class,$c) = @_;
  my $param = $c->req->parameters;
  my $user = $c->db->get_user_by_email($param->{email});
- 
+ if($param->{password} eq $user->password){
+   $c->session->set('userid' => $user->id);
+   return $c->redirect('/mypage'); 
+ }
  return $c->redirect('login.tx');
 }
 
+sub mypage{
+ my($class,$c) = @_;
+ return $c->render('mypage.tx');
+}
+
+sub postanalytics{
+ my($class,$c) = @_;
+ $c->session->set('date' => $c->req->parameters->{date});
+ return $c->redirect('/mypage');
+}
+
+sub analytics{
+ my($class,$c) = @_;
+ my $date = $c->session->get('date');
+ my $itr = $c->db->get_income($c->session->get('userid'),$date);
+ my $income = [];
+ while(my $row = $itr->next){
+     push @$income,{income => $row->income,extra => $row->extra,business=> $row->business,bonus => $row->bonus,total => $row->total};
+ }
+  $c->render_json($income);
+}
 
 1;

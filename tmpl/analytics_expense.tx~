@@ -1,7 +1,3 @@
-: cascade "include/mypage.tx"
-
-: override content -> {
-
  <h2>分析(収入）</h2>
 
 <font color="#000000" size="2"><span style="background-color: #ffb6b9">事業収入</span></font>
@@ -26,7 +22,7 @@
  $(document).ready(function(){
   $.ajax({
    type: 'GET',
-   url: '/analytics',
+   url: '/analytics/expense',
    datatype: 'json',
    success: function(data){
     var properties = '';

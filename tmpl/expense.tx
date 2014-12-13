@@ -31,6 +31,39 @@
   <dt>交際費</dt>
   <dd><input type="text" name="society" size="4" maxlength="8" class="validate number">円</dd>
 
+  <dt>娯楽</dt>
+  <dd><input type="text" name="entertainment" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>教育</dt>
+  <dd><input type="text" name="teaching" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>衣服</dt>
+  <dd><input type="text" name="dress" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>医療</dt>
+  <dd><input type="text" name="clinic" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>通信</dt>
+  <dd><input type="text" name="communicate" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>水道</dt>
+  <dd><input type="text" name="water" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>住まい</dt>
+  <dd><input type="text" name="living" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>車</dt>
+  <dd><input type="text" name="car" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>税金</dt>
+  <dd><input type="text" name="tax" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>大型出費</dt>
+  <dd><input type="text" name="large_consume" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>その他</dt>
+  <dd><input type="text" name="other" size="4" maxlength="8" class="validate number">円</dd>
+
 
   
 </dl>
