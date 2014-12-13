@@ -8,11 +8,15 @@
 <dl>
  <input type="text" id="datepicker" name="date"/>
 </dl>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 <p><input type="submit" value="分析する"></p>
 </form>
 
-o
-
+<font color="#000000" size="2"><span style="background-color: #ffb6b9">Business</span></font>
+<font color="#000000" size="2"><span style="background-color: #A8BECB">Extra</span></font>
+<font color="#000000" size="2"><span style="background-color: #aaf2fb">Bonus</span></font>
+<font color="#000000" size="2"><span style="background-color: #ffff00">Income</span></font>
+単位:円
 <canvas id="sample" height="500" width="500"></canvas>
 
 <script>
