@@ -25,8 +25,8 @@ sub get_user_by_email{
 }
 
 sub get_income{
- my($self,$user_id) = @_;
- my $itr = $self->search('income',+{user_id => $user_id});
+ my($self,$user_id,$date) = @_;
+ my $itr = $self->search('income',+{user_id => $user_id,date => $date});
  return $itr;
 }
 

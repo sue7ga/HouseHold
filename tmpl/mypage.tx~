@@ -2,4 +2,66 @@
 
 : override content -> {
 
+ <h2>分析</h2>
+
+ <input type="text" id="datepicker" name="date"/>
+
+<canvas id="sample" height="500" width="500"></canvas>
+
+<script>
+ 
+ $(document).ready(function(){
+  $.ajax({
+   type: 'GET',
+   url: '/analytics',
+   datatype: 'json',
+   data:{
+     date:document.getElementById("datepicker");
+   },
+   success: function(data){
+    var properties = '';
+    for(var prop in data){
+      properties = data[prop];
+    }    
+    var bonus = parseInt(properties.bonus);
+    var business= parseInt(properties.business); 
+    var extra = parseInt(properties.extra);
+    var  income = parseInt(properties.income);
+    var doughnutData = [
+    {
+      value: bonus,
+      color:"#aaf2fb"
+    },
+    {
+      value: business,
+      color: "#ffb6b9" 
+    },
+    {
+     value: extra,
+     color: "#A8BECB"
+    },
+    {
+     value: income,
+     color: "#ffff00"
+    }
+
+   ];
+ 
+    var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);
+   },
+   error: function(){
+     alert('error');
+   }
+    });
+ });
+
+$(function() {
+$("#datepicker").datepicker();
+}); 
+
+
+</script>     
+
+
 :}
+

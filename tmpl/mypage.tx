@@ -4,6 +4,15 @@
 
  <h2>分析</h2>
 
+<form method="post" action="<: uri_for('/post/analytics') :>">
+<dl>
+ <input type="text" id="datepicker" name="date"/>
+</dl>
+<p><input type="submit" value="分析する"></p>
+</form>
+
+o
+
 <canvas id="sample" height="500" width="500"></canvas>
 
 <script>
@@ -18,23 +27,28 @@
     for(var prop in data){
       properties = data[prop];
     }    
-    var business = properties.bonus;
-    var hoge = parseInt(properties.bonus);
-    var foo = parseInt(properties.business); 
-    var bar = 30;
+    var bonus = parseInt(properties.bonus);
+    var business= parseInt(properties.business); 
+    var extra = parseInt(properties.extra);
+    var  income = parseInt(properties.income);
     var doughnutData = [
-   {
-      value: hoge,
-      color:"#aaf2fb"
-   },
-   {
-      value: foo,
-      color: "#ffb6b9" 
-   },
     {
-     value: bar,
+      value: bonus,
+      color:"#aaf2fb"
+    },
+    {
+      value: business,
+      color: "#ffb6b9" 
+    },
+    {
+     value: extra,
      color: "#A8BECB"
+    },
+    {
+     value: income,
+     color: "#ffff00"
     }
+
    ];
  
     var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);
@@ -45,7 +59,9 @@
     });
  });
 
- 
+$(function() {
+$("#datepicker").datepicker();
+}); 
 
 
 </script>     

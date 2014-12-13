@@ -71,14 +71,20 @@ sub mypage{
  return $c->render('mypage.tx');
 }
 
+sub postanalytics{
+ my($class,$c) = @_;
+ $c->session->set('date' => $c->req->parameters->{date});
+ return $c->redirect('/mypage');
+}
+
 sub analytics{
  my($class,$c) = @_;
- my $itr = $c->db->get_income($c->session->get('userid'));
+ my $date = $c->session->get('date');
+ my $itr = $c->db->get_income($c->session->get('userid'),$date);
  my $income = [];
  while(my $row = $itr->next){
      push @$income,{income => $row->income,extra => $row->extra,business=> $row->business,bonus => $row->bonus,total => $row->total};
  }
- print Dumper $income;
   $c->render_json($income);
 }
 

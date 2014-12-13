@@ -35,8 +35,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/register">ユーザー登録</a></li>
-                    <li><a href="/login">ユーザーログイン</a></li>
+                    <li class="active"><a href="/mypage">マイページ</a></li>
                     <li><a href="/income">収入</a></li>
                     <li><a href="/expense">支出</a></li>
                     <li><a href="/settings">設定</a></li>

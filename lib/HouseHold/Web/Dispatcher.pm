@@ -29,4 +29,6 @@ get '/mypage' => "HouseHold#mypage";
 
 get '/analytics' => "HouseHold#analytics";
 
+post '/post/analytics' => "HouseHold#postanalytics";
+
 1;
