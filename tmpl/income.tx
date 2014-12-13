@@ -1,0 +1,51 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+    <ul class="nav nav-pills">
+    <li class="active">
+    <a href="/income">収入</a>
+    </li>
+    <li><a href="/expense">支出</a></li>
+    </ul>
+
+
+
+<form method="post" action="/post/income">
+
+<dl>
+
+  <input type="text" id="datepicker" name="date"/>
+ <br/><br/><br/><br/><br/><br/>
+
+  <dt>給与所得</dt>
+  <dd><input type="text" name="income" size="4" maxlength="8" class="validate number">円</dd>
+ 
+  <dt>臨時収入</dt>
+  <dd><input type="text" name="extra" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>事業所得</dt>
+  <dd><input type="text" name="business" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>賞与</dt>
+  <dd><input type="text" name="bonus" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>その他</dt>
+  <dd><input type="text" name="other" size="4" maxlength="8" class="validate number">円</dd>
+
+  
+</dl>
+
+<p><input type="submit" value="入力"></p>
+
+</form>
+
+<script>
+$(function() {
+$("#datepicker").datepicker();
+});
+</script>
+
+
+
+:}

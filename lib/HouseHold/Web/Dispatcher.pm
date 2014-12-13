@@ -4,26 +4,29 @@ use warnings;
 use utf8;
 use Amon2::Web::Dispatcher::RouterBoom;
 
-any '/' => sub {
-    my ($c) = @_;
-    my $counter = $c->session->get('counter') || 0;
-    $counter++;
-    $c->session->set('counter' => $counter);
-    return $c->render('index.tx', {
-        counter => $counter,
-    });
-};
+use Module::Find;
 
-post '/reset_counter' => sub {
-    my $c = shift;
-    $c->session->remove('counter');
-    return $c->redirect('/');
-};
+useall 'HouseHold::Web::C';
+base 'HouseHold::Web::C';
 
-post '/account/logout' => sub {
-    my ($c) = @_;
-    $c->session->expire();
-    return $c->redirect('/');
-};
+get '/income' => "HouseHold#income";
+
+post '/post/income' => "HouseHold#postincome";
+
+get '/expense' => "HouseHold#expense";
+
+post '/post/expense' => "HouseHold#postexpense";
+
+get '/register' => "HouseHold#register";
+
+post '/user/register' => "HouseHold#userregister";
+
+get '/login' => "HouseHold#login";
+
+post 'user/login' => "HouseHold#userlogin";
+
+get '/mypage' => "HouseHold#mypage";
+
+get '/analytics' => "HouseHold#analytics";
 
 1;

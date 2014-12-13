@@ -1,0 +1,55 @@
+: cascade "include/mypage.tx"
+
+: override content -> {
+
+ <h2>分析</h2>
+
+<canvas id="sample" height="500" width="500"></canvas>
+
+<script>
+ 
+ $(document).ready(function(){
+  $.ajax({
+   type: 'GET',
+   url: '/analytics',
+   datatype: 'json',
+   success: function(data){
+    var properties = '';
+    for(var prop in data){
+      properties = data[prop];
+    }    
+    var business = properties.bonus;
+    var hoge = parseInt(properties.bonus);
+    var foo = parseInt(properties.business); 
+    var bar = 30;
+    var doughnutData = [
+   {
+      value: hoge,
+      color:"#aaf2fb"
+   },
+   {
+      value: foo,
+      color: "#ffb6b9" 
+   },
+    {
+     value: bar,
+     color: "#A8BECB"
+    }
+   ];
+ 
+    var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);
+   },
+   error: function(){
+     alert('error');
+   }
+    });
+ });
+
+ 
+
+
+</script>     
+
+
+:}
+

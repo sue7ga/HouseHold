@@ -1,0 +1,66 @@
+package HouseHold::Web::C::HouseHold;
+use Data::Dumper;
+use utf8;
+use Encode;
+
+sub income{
+ my($class,$c) = @_;
+ return $c->render('income.tx');
+}
+
+sub postincome{
+ my($class,$c) = @_;
+ $param = $c->req->parameters;
+ my $total = 0;
+ for (qw/income bonus extra business other/){
+   $total += $param->{$_};
+ }
+ $param->add('total',$total);
+ $param->remove('XSRF-TOKEN');
+ print Dumper $param;
+ $c->db->insert_income($param);
+ return $c->redirect('/income');
+}
+
+sub expense{
+ my($class,$c) = @_;
+ return $c->render('expense.tx');
+}
+
+sub postexpense{
+ my($class,$c) = @_;
+ print Dumper $c->req->parameters;
+ return $c->redirect('/expense');
+}
+
+
+sub register{
+ my($class,$c) = @_;
+ return $c->render('register.tx');
+}
+
+sub userregister{
+ my($class,$c) = @_;
+ my $param = $c->req->parameters;
+ $param->remove('XSRF-TOKEN');
+ $param->remove('email_check');
+ $param->remove('password_check');
+ $c->db->insert_user($param);
+return $c->redirect('/register');
+}
+
+sub login{
+ my($class,$c) = @_;
+ return $c->render('login.tx');
+}
+
+sub userlogin{
+ my($class,$c) = @_;
+ my $param = $c->req->parameters;
+ my $user = $c->db->get_user_by_email($param->{email});
+ 
+ return $c->redirect('login.tx');
+}
+
+
+1;

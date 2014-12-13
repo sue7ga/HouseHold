@@ -1,0 +1,103 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+<h1>生徒登録</h1>
+
+<form method="post" action="<: uri_for('user/register') :>">
+ <dl>
+ <dt>お名前</dt>
+ <dd><input type="text" name="name" size="80" class="validate required"></dd>
+ <dt>メールアドレス</dt>
+ <dd><input type="text" name="email" size="80" class="validate mail"></dd>
+ <dt>メールアドレス(確認)</dt>
+ <dd><input type="text" name="email_check" size="80" class="validate mail mail_check"></dd>
+ <dt>パスワード</dt>
+ <dd><input type="password" name="password" size="80" class="validate password first"></dd>
+ <dt>パスワード(確認)</dt>
+ <dd><input type="password" name="password_check" size="80" class="validate password password_check"></dd>
+ <dt>性別<span>※</span></dt>
+ <dd>
+   <input type="radio" value="男性" name="gender" id="man" class="validate required"><label for="man">男性</label>
+   <input type="radio" value="女性" name="gender" id="woman"><label for="woman">女性</label> 
+ </dd>
+<p><input type="submit" value="送信"></p>
+</form>
+
+
+<script type="text/javascript">
+
+  $("form").submit(function(){
+   
+   $("p.error").remove();
+   $("dl dd").removeClass("error");
+
+
+    $("input[type='text'].validate,textarea.validate").each(function(){
+
+         if($(this).hasClass("required")){
+            if($(this).val()==""){
+               $(this).parent().prepend("<p class='error'>必須項目です</p>");
+            }
+         }
+            
+     
+         if($(this).hasClass("number")){
+          if(isNaN($(this).val())){
+            $(this).parent().prepend("<p class='error'>数値のみ入力可能です</p>");
+         }
+        }
+   
+       if($(this).hasClass("mail")){
+         if($(this).val() && !$(this).val().match(/.+@.+\..+/g)){
+            $(this).parent().prepend("<p class='error'>メールアドレスの形式が異なります</p>"); 
+        }
+       }
+
+      if($(this).hasClass("mail_check")){
+        if($(this).val() && $(this).val() != $("input[name="+$(this).attr("name").replace(/^(.+)_check$/,"$1")+"]").val()){
+           $(this).parent().prepend("<p class='error'>メールアドレスと内容が異なります</p>");
+        }  
+      }      
+
+     });
+
+     $("input[type='radio'].validate.required").each(function(){
+       if($("input[name="+$(this).attr("name")+"]:checked").length == 0){
+           $(this).parent().prepend("<p class='error'>選択してください</p>");   
+       }  
+     });  
+
+
+    $("input[type='password'].validate,textarea.validate").each(function(){
+         
+      //passwordの形式チェック
+      if($(this).hasClass("first")){
+         if($(this).val() && $(this).val().length > 8){
+            $(this).parent().prepend("<p class='error'>パスワードが長すぎます。８文字以内で入力してください！</p>");
+         }
+      }
+
+      if($(this).hasClass("password_check")){
+        if($(this).val() && $(this).val() != $("input[name="+$(this).attr("name").replace(/^(.+)_check$/,"$1")+"]").val()){
+            $(this).parent().prepend("<p class='error'>パスワードと内容が異なります</p>");
+        }
+      }
+
+    });
+   
+    if($("p.error").length > 0){
+       $('html,body').animate({scrollTop: $("p.error:first").offset().top-40},'slow');
+       $("p.error").parent().addClass("error");
+       return false;
+    }
+
+
+  });
+
+</script>
+
+
+
+
+:}

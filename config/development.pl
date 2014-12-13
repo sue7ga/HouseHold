@@ -4,9 +4,17 @@ my $basedir = File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..'));
 my $dbpath = File::Spec->catfile($basedir, 'db', 'development.db');
 +{
     'DBI' => [
-        "dbi:SQLite:dbname=$dbpath", '', '',
+        "dbi:mysql:household", 'suenaga', 'hirokihH5',
         +{
-            sqlite_unicode => 1,
-        }
+            mysql_enable_utf8 => 1
+        },
     ],
+   Auth => +{
+    Twitter => +{
+    consumer_key => 'I4sFcihDdmXT0Lf80nu3BD5Cq',
+    consumer_secret => 'JAA2KmBKnuU7dOmqq4R9AJMYbIbJAgQmiOufD71lRtDopP2Xc8',
+    ssl => 0,
+    },
+   },
+  
 };
