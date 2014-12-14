@@ -15,6 +15,7 @@ sub insert_income{
 
 sub insert_expense{
  my ($self,$param) = @_;
+ print Dumper $param;
  $self->insert('expense',$param);
 }
 

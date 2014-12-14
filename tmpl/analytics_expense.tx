@@ -6,7 +6,7 @@
 <font color="#000000" size="2"><span style="background-color: #ffb6b9">事業収入</span></font>
 単位:円
 
-<form method="post" action="<: uri_for('/post/expense') :>">
+<form method="post" action="<: uri_for('/post/expense/analytics') :>">
 <dl>
   <input type="text" id="datepicker" name="date"/>
 </dl>
@@ -31,24 +31,78 @@
     for(var prop in data){
       properties = data[prop];
     }    
-    var bonus = parseInt(properties.bonus);
+    console.log(properties);
+    var car = parseInt(properties.car);
+    var clinic = parseInt(properties.clinic);
+    var dress = parseInt(properties.dress);
+    var entertainment = parseInt(properties.entertainment);
+    var fare = parseInt(properties.fare);
+    var food = parseInt(properties.food);
+    var good = parseInt(properties.good);
+    var large_consume = parseInt(properties.large_consume);
+    var living = parseInt(properties.living);
+    var other = parseInt(properties.other);
+    var society = parseInt(properties.society);
+    var tax = parseInt(properties.tax);
+    var teaching = parseInt(properties.teaching);
+    var water = parseInt(properties.water);
     var doughnutData = [
     {
-      value: 20,
+      value: car,
       color:"#aaf2fb"
     },
     {
-      value: 30,
-      color: "#ffb6b9" 
+      value: clinic,
+      color:"#000000"
     },
     {
-     value: 30,
-     color: "#A8BECB"
+      value: dress,
+      color:"#ff7f50"
+    },
+   {
+      value: entertainment,
+      color:"#fafad2"
+    },
+   {
+      value: fare,
+      color:"#006400"
+    },
+   {
+      value: food,
+      color:"#4682b4"
+    },
+   {
+      value: good,
+      color:"#7cfc00"
     },
     {
-     value: 345,
-     color: "#ffff00"
-    }
+      value: large_consume,
+      color:"#b8860b"
+    },
+    {
+      value:living,
+      color:"#ff00ff"
+    },
+    {
+      value: other,
+      color:"#7cfc00"
+    },
+    {
+      value: society,
+      color:"#ffe4b5"
+    },
+    {
+      value: tax,
+      color:"#8b008b"
+    },
+    {
+      value: teaching,
+      color:"#a52a2a"
+    },
+    {
+      value: water,
+      color:"#556b2f"
+    },
    ];
  
     var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);

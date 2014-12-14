@@ -3,6 +3,7 @@ use Data::Dumper;
 use utf8;
 use Encode;
 
+#income
 sub income{
  my($class,$c) = @_;
  return $c->render('income.tx');
@@ -27,8 +28,9 @@ sub expense{
  return $c->render('expense.tx');
 }
 
-sub postexpense{
- my($class,$c) = @_;
+
+sub post_expense{
+ my($class,$c) = @_; 
  my $param = $c->req->parameters;
  my $total = 0;
  for (qw/food good fare society entertainment teaching dress clinic communicate water living car tax large_consume other/){
@@ -37,7 +39,6 @@ sub postexpense{
  $param->add('total',$total);
  $param->add('user_id',$c->session->get('userid'));
  $param->remove('XSRF-TOKEN');
- print Dumper $param;
  $c->db->insert_expense($param);
  return $c->redirect('/expense/analytics');
 }
@@ -94,11 +95,12 @@ sub expense_analytics{
  return $c->render('analytics_expense.tx');
 }
 
-sub postexpense{
+sub post_expense_analytics{
  my($class,$c) = @_;
  $c->session->set('expense_date' => $c->req->parameters->{date});
  return $c->redirect('/expense/analytics');
 }
+
 
 #json
 sub analytics{

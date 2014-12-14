@@ -11,11 +11,9 @@
     </ul>
 
 
-
 <form method="post" action="/post/expense">
 
 <dl>
-
   <input type="text" id="datepicker" name="date"/>
  <br/><br/><br/><br/><br/><br/>
  
@@ -63,16 +61,12 @@
 
   <dt>その他</dt>
   <dd><input type="text" name="other" size="4" maxlength="8" class="validate number">円</dd>
-
-
   
 </dl>
 
 <p><input type="submit" value="入力"></p>
 
 </form>
-
-
 
 <script>
 $(function() {

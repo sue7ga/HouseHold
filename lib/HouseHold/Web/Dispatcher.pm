@@ -9,13 +9,29 @@ use Module::Find;
 useall 'HouseHold::Web::C';
 base 'HouseHold::Web::C';
 
+#income
 get '/income' => "HouseHold#income";
 
 post '/post/income' => "HouseHold#postincome";
 
+get '/mypage' => "HouseHold#mypage";
+
+get '/analytics' => "HouseHold#analytics";
+
+post '/post/analytics' => "HouseHold#postanalytics";
+#expense
+
 get '/expense' => "HouseHold#expense";
 
-post '/post/expense' => "HouseHold#postexpense";
+post '/post/expense' => "HouseHold#post_expense";
+
+get '/expense/analytics' => "HouseHold#expense_analytics";
+
+post '/post/expense/analytics' => "HouseHold#post_expense_analytics";
+
+get 'analytics/expense' => "HouseHold#analyticsexpense";
+
+#user
 
 get '/register' => "HouseHold#register";
 
@@ -25,18 +41,5 @@ get '/login' => "HouseHold#login";
 
 post 'user/login' => "HouseHold#userlogin";
 
-get '/mypage' => "HouseHold#mypage";
-
-post '/post/expense' => "HouseHold#postexpense";
-
-get '/analytics' => "HouseHold#analytics";
-
-post '/post/analytics' => "HouseHold#postanalytics";
-
-get '/expense/analytics' => "HouseHold#expense_analytics";
-
-post '/post/expense/analytics' => "HouseHold#post_expense_analytics";
-
-get 'analytics/expense' => "HouseHold#analyticsexpense";
 
 1;
