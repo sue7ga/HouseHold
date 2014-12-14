@@ -39,7 +39,6 @@
                     <li><a href="/login">ユーザーログイン</a></li>
                     <li><a href="/income">収入</a></li>
                     <li><a href="/expense">支出</a></li>
-                    <li><a href="/settings">設定</a></li>
                 </ul>
             </div>
         </div><!-- /.container -->

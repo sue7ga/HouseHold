@@ -1,0 +1,56 @@
+    {
+      value: car,
+      color:"#aaf2fb"
+    },
+    {
+      value: clinic,
+      color:"#000000"
+    },
+    {
+      value: dress,
+      color:"#ff7f50"
+    },
+   {
+      value: entertainment,
+      color:"#fafad2"
+    },
+   {
+      value: fare,
+      color:"#006400"
+    },
+   {
+      value: food,
+      color:"#4682b4"
+    },
+   {
+      value: good,
+      color:"#7cfc00"
+    },
+    {
+      value: large_consume,
+      color:"#b8860b"
+    },
+    {
+      value:living,
+      color:"#ff00ff"
+    },
+    {
+      value: other,
+      color:"#7cfc00"
+    },
+    {
+      value: society,
+      color:"#ffe4b5"
+    },
+    {
+      value: tax,
+      color:"#8b008b"
+    },
+    {
+      value: teaching,
+      color:"#a52a2a"
+    },
+    {
+      value: water,
+      color:"#556b2f"
+    },

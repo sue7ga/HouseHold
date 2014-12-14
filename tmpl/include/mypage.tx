@@ -35,8 +35,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/mypage">収入</a></li>
-                    <li><a href="/expense/analytics">支出</a></li>
+                    <li><a href="/mypage">収入(分析)</a></li>
+                    <li><a href="/expense/analytics">支出(分析)</a></li>
+                    <li><a href="/expense">支出(登録)</a></li>
+                    <li><a href="/income">収入(登録)</a></li>
                     <li><a href="/settings">設定</a></li>
                 </ul>
             </div>
