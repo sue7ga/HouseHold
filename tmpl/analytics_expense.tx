@@ -4,14 +4,15 @@
  <h2>分析(支出）</h2>
 
 <font color="#000000" size="2"><span style="background-color: #ffb6b9">事業収入</span></font>
-
 単位:円
 
-<form method="post" action="<: uri_for('/post/expesense') :>">
+<form method="post" action="<: uri_for('/post/expense') :>">
 <dl>
- <input type="text" id="datepicker" name="date"/>
+  <input type="text" id="datepicker" name="date"/>
 </dl>
+
 <br/><br/><br/><br/><br/><br/><br/><br/>
+
 <p><input type="submit" value="分析する"></p>
 </form>
 
@@ -31,27 +32,23 @@
       properties = data[prop];
     }    
     var bonus = parseInt(properties.bonus);
-    var business= parseInt(properties.business); 
-    var extra = parseInt(properties.extra);
-    var  income = parseInt(properties.income);
     var doughnutData = [
     {
-      value: bonus,
+      value: 20,
       color:"#aaf2fb"
     },
     {
-      value: business,
+      value: 30,
       color: "#ffb6b9" 
     },
     {
-     value: extra,
+     value: 30,
      color: "#A8BECB"
     },
     {
-     value: income,
+     value: 345,
      color: "#ffff00"
     }
-
    ];
  
     var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);
@@ -63,7 +60,7 @@
  });
 
 $(function() {
-$("#datepicker").datepicker();
+  $("#datepicker").datepicker();
 }); 
 
 

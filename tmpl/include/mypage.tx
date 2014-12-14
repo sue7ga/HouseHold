@@ -19,7 +19,7 @@
     <script src="<: uri_for('/static/js/xsrf-token.js') :>"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-     <script src="/static/js/Chart.js"></scrip>
+    <script src="/static/js/Chart.js"></scrip>
     <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     <link href="<: static_file('/static/css/main.css') :>" rel="stylesheet" type="text/css" media="screen" />
     <script src="<: static_file('/static/js/main.js') :>"></script>

@@ -37,8 +37,9 @@ sub postexpense{
  $param->add('total',$total);
  $param->add('user_id',$c->session->get('userid'));
  $param->remove('XSRF-TOKEN');
+ print Dumper $param;
  $c->db->insert_expense($param);
- return $c->redirect('/expense');
+ return $c->redirect('/expense/analytics');
 }
 
 sub expense_analytics{
@@ -88,6 +89,18 @@ sub postanalytics{
  return $c->redirect('/mypage');
 }
 
+sub expense_analytics{
+ my($class,$c) = @_;
+ return $c->render('analytics_expense.tx');
+}
+
+sub postexpense{
+ my($class,$c) = @_;
+ $c->session->set('expense_date' => $c->req->parameters->{date});
+ return $c->redirect('/expense/analytics');
+}
+
+#json
 sub analytics{
  my($class,$c) = @_;
  my $date = $c->session->get('date');
@@ -97,6 +110,17 @@ sub analytics{
      push @$income,{income => $row->income,extra => $row->extra,business=> $row->business,bonus => $row->bonus,total => $row->total};
  }
   $c->render_json($income);
+}
+
+sub analyticsexpense{
+ my($class,$c) = @_;
+ my $date = $c->session->get('expense_date');
+ my $itr = $c->db->get_expense($c->session->get('userid'),$date);
+ my $expense = [];
+ while(my $row = $itr->next){
+     push @$expense,{food => $row->food,good => $row->good,fare => $row->fare,society => $row->society,entertainment => $row->entertainment,teaching => $row->teaching, dress=> $row->dress,clinic => $row->clinic ,$communicate => $row->communicate,water => $row->water,living => $row->living,car => $row->car,tax => $row->tax,large_consume => $row->large_consume,other => $row->other};
+ }
+  $c->render_json($expense);
 }
 
 1;

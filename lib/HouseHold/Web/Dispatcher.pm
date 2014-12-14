@@ -27,11 +27,16 @@ post 'user/login' => "HouseHold#userlogin";
 
 get '/mypage' => "HouseHold#mypage";
 
+post '/post/expense' => "HouseHold#postexpense";
+
 get '/analytics' => "HouseHold#analytics";
 
 post '/post/analytics' => "HouseHold#postanalytics";
 
 get '/expense/analytics' => "HouseHold#expense_analytics";
 
+post '/post/expense/analytics' => "HouseHold#post_expense_analytics";
+
+get 'analytics/expense' => "HouseHold#analyticsexpense";
 
 1;

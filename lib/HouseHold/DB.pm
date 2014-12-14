@@ -35,4 +35,10 @@ sub get_income{
  return $itr;
 }
 
+sub get_expense{
+ my($self,$user_id,$date) = @_;
+ my $itr = $self->search('expense',+{user_id => $user_id,date => $date});
+ return $itr;
+}
+
 1;
