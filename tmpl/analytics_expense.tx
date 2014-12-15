@@ -21,7 +21,8 @@
 
 <form method="post" action="<: uri_for('/post/expense/analytics') :>">
 <dl>
-  <input type="text" id="datepicker" name="date"/>
+ <dt>日付</dt>
+ <dd><input type="text" id="datepicker" name="date"/></dd>
 </dl>
 
 <br/><br/><br/><br/><br/><br/><br/><br/>

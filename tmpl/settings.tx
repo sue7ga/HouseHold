@@ -1,0 +1,14 @@
+: cascade "include/mypage.tx"
+
+: override content -> {
+
+<form method="post" action="<: uri_for('setting/password') :>">
+  <dl>
+   <dt>パスワード変更</dt> 
+   元のパスワード：<dd><input type="password" name="password" size="80"></dd>
+   新しいパスワード：<dd><input type="password" name="newpassword" size="80"></dd>
+  </dl>
+<p><input type="submit" value="変更する"></p>
+</form>
+
+:}

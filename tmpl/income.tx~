@@ -14,8 +14,8 @@
 <form method="post" action="/post/income">
 
 <dl>
-
-  <input type="text" id="datepicker" name="date"/>
+  <dt>日付</dt>
+  <dd><input type="text" id="datepicker" name="date"/></dd>
  <br/><br/><br/><br/><br/><br/>
 
   <dt>給与所得</dt>
@@ -29,6 +29,9 @@
 
   <dt>賞与</dt>
   <dd><input type="text" name="bonus" size="4" maxlength="8" class="validate number">円</dd>
+
+  <dt>その他</dt>
+  <dd><input type="text" name="other" size="4" maxlength="8" class="validate number">円</dd>
 
   
 </dl>

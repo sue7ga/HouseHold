@@ -41,5 +41,10 @@ get '/login' => "HouseHold#login";
 
 post 'user/login' => "HouseHold#userlogin";
 
+get 'logout' => "HouseHold#logout";
+
+get '/settings' => "HouseHold#settings";
+
+post 'setting/password' => "HouseHold#change_password";
 
 1;

@@ -2,6 +2,7 @@ package HouseHold::DB;
 use strict;
 use warnings;
 use utf8;
+use Data::Dumper;
 use parent qw(Teng);
 
 __PACKAGE__->load_plugin('Count');
@@ -40,6 +41,16 @@ sub get_expense{
  my($self,$user_id,$date) = @_;
  my $itr = $self->search('expense',+{user_id => $user_id,date => $date});
  return $itr;
+}
+
+sub user_change_pass{
+ my($self,$user_id,$param) = @_; 
+ my $itr = $self->search('user',+{id => $user_id});
+ while(my $row = $itr->next){
+   if($row->password eq $param->{password}){
+    $self->update('user',+{password => $param->{newpassword}},+{id => $user_id});
+   }
+ }
 }
 
 1;

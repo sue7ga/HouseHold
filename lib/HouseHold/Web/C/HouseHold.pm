@@ -6,7 +6,11 @@ use Encode;
 #income
 sub income{
  my($class,$c) = @_;
- return $c->render('income.tx');
+ if($c->session->get('userid')){
+  return $c->render('income.tx');
+ }else{
+  return $c->redirect('/login');
+ }
 }
 
 sub postincome{
@@ -25,9 +29,21 @@ sub postincome{
 
 sub expense{
  my($class,$c) = @_;
- return $c->render('expense.tx');
+ if($c->session->get('userid')){
+     return $c->render('expense.tx');
+ }else{
+    return $c->redirect('/login');
+ }
 }
 
+sub settings{
+ my($class,$c) = @_;
+ if($c->session->get('userid')){
+  return $c->render('settings.tx');
+ }else{
+  return $c->redirect('/login');
+ }
+}
 
 sub post_expense{
  my($class,$c) = @_; 
@@ -45,7 +61,11 @@ sub post_expense{
 
 sub expense_analytics{
  my ($class,$c) = @_;
- return $c->render('analytics_expense.tx');
+ if($c->session->get('userid')){
+  return $c->render('analytics_expense.tx');
+}else{
+  return $c->redirect('/login');
+}
 }
 
 sub register{
@@ -75,13 +95,24 @@ sub userlogin{
  if($param->{password} eq $user->password){
    $c->session->set('userid' => $user->id);
    return $c->redirect('/mypage'); 
+ }else{
+   return $c->redirect('/login');
  }
- return $c->redirect('login.tx');
+}
+
+sub logout{
+ my($class,$c) = @_;
+ $c->session->remove('userid');
+ return $c->redirect('/login');
 }
 
 sub mypage{
  my($class,$c) = @_;
- return $c->render('mypage.tx');
+ if($c->session->get('userid')){ 
+   return $c->render('mypage.tx');
+}else{
+  return $c->redirect('/login');
+}
 }
 
 sub postanalytics{
@@ -92,7 +123,11 @@ sub postanalytics{
 
 sub expense_analytics{
  my($class,$c) = @_;
- return $c->render('analytics_expense.tx');
+ if($c->session->get('userid')){
+   return $c->render('analytics_expense.tx');
+ }else{
+  return $c->redirect('/login');
+ }
 }
 
 sub post_expense_analytics{
@@ -101,6 +136,12 @@ sub post_expense_analytics{
  return $c->redirect('/expense/analytics');
 }
 
+sub change_password{
+ my ($class,$c) = @_;
+ my $param = $c->req->parameters;
+ $c->db->user_change_pass($c->session->get('userid'),$param);
+ return $c->redirect('/settings');
+}
 
 #json
 sub analytics{

@@ -1,4 +1,4 @@
-: cascade "include/layout.tx"
+: cascade "include/mypage.tx"
 
 : override content -> {
 
@@ -14,8 +14,8 @@
 <form method="post" action="/post/income">
 
 <dl>
-
-  <input type="text" id="datepicker" name="date"/>
+  <dt>日付</dt>
+  <dd><input type="text" id="datepicker" name="date"/></dd>
  <br/><br/><br/><br/><br/><br/>
 
   <dt>給与所得</dt>

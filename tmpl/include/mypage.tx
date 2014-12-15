@@ -40,6 +40,7 @@
                     <li><a href="/expense">支出(登録)</a></li>
                     <li><a href="/income">収入(登録)</a></li>
                     <li><a href="/settings">設定</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
         </div><!-- /.container -->
