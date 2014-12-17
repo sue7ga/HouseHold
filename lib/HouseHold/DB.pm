@@ -37,6 +37,37 @@ sub get_income{
  return $itr;
 }
 
+sub get_total_income{
+ my($self,$date) = @_;
+ my $itr = $self->single('income',+{date => $date},+{columns => [qw/total/]});
+ return $itr;
+}
+
+sub get_total_month{
+ my($self,$num) = @_;
+ my @incomes = $self->search('income',+{},+{});
+ my $income_total = 0;
+ my $extra_total = 0;
+ my $business_total = 0;
+ my $bonus_total = 0;
+ my $other_total = 0;
+ my $month_total = 0;
+ for my $income(@incomes){
+   my($dd,$mm,$yyyy) = ($income->date =~ /(\d+)\/(\d+)\/(\d+)/);
+   unless($dd == $num){
+          next;
+   }
+   $income_total += $income->income; 
+   $extra_total += $income->extra; 
+   $business_total += $income->business;
+   $bonus_total += $income->bonus;
+   $other_total += $income->other;
+   $month_total += $income->total;
+ }
+ my $total_info = {income_total => $income_total,extra_total => $extra_total,business_total => $business_total,bonus_total => $bonus_total,other_total => $other_total,month_total => $month_total};
+ return $total_info;
+}
+
 sub get_expense{
  my($self,$user_id,$date) = @_;
  my $itr = $self->search('expense',+{user_id => $user_id,date => $date});

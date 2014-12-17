@@ -10,15 +10,6 @@
 <font color="#000000" size="2"><span style="background-color: #ffff00">給与所得</span></font>
 単位:円
 
-<form method="post" action="<: uri_for('/post/analytics') :>">
-<dl>
- <dt>日付</ddt>
- <dd><input type="text" id="datepicker" name="date"/></dd>
-
-</dl>
-<br/><br/><br/><br/><br/><br/><br/><br/>
-<p><input type="submit" value="分析する"></p>
-</form>
 
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -27,12 +18,17 @@
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/mypage">日</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">週</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/income">月</a></li>
   </ul>
 </div>
 
-
+事業収入合計：
+臨時収入合計：
+賞与合計：
+給与所得合計：
 合計額：<:$total:>円
+
 
 <br/>
 

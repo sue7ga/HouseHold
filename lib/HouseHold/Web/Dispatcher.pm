@@ -16,9 +16,15 @@ post '/post/income' => "HouseHold#postincome";
 
 get '/mypage' => "HouseHold#mypage";
 
+get '/month/income' => "HouseHold#month_income";
+
 get '/analytics' => "HouseHold#analytics";
 
 post '/post/analytics' => "HouseHold#postanalytics";
+
+get 'month/:number' => "HouseHold#month_number";
+
+get '/income/month/info' => "HouseHold#income_month_info";
 #expense
 
 get '/expense' => "HouseHold#expense";

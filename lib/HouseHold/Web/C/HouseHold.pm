@@ -108,11 +108,26 @@ sub logout{
 
 sub mypage{
  my($class,$c) = @_;
+ my $date = $c->session->get('date');
+ my $itr = $c->db->get_total_income($date);
  if($c->session->get('userid')){ 
-   return $c->render('mypage.tx');
+   return $c->render('mypage.tx',{total => $itr->total});
 }else{
   return $c->redirect('/login');
 }
+}
+
+sub month_income{
+ my($class,$c) = @_;
+ my $month_number = $c->session->get('month_number');
+ my $total_info = $c->db->get_total_month($month_number);
+ return $c->render('month_income.tx',{total_info => $total_info});
+}
+
+sub month_number{
+ my($class,$c,$args) = @_;
+ $c->session->set('month_number' => $args->{number});
+ return $c->redirect('/month/income');
 }
 
 sub postanalytics{
@@ -144,6 +159,16 @@ sub change_password{
 }
 
 #json
+sub income_month_info{
+ my($class,$c) = @_;
+ my $num = $c->session->get('month_number');
+ my $total_info = $c->db->get_total_month($num);
+ my $infos = [];
+ push @$infos,$total_info;
+ print Dumper $infos;
+ return $c->render_json($infos);
+}
+
 sub analytics{
  my($class,$c) = @_;
  my $date = $c->session->get('date');

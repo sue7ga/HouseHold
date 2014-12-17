@@ -1,0 +1,119 @@
+: cascade "include/mypage.tx"
+
+: override content -> {
+
+ <h2>分析(収入）</h2>
+
+<font color="#000000" size="2"><span style="background-color: #ffb6b9">事業収入合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #A8BECB">臨時収入合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #aaf2fb">賞与合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #ffff00">給与所得合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #ff1493">その他合計</span></font>
+単位:円
+
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    分析項目
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/mypage">日</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/income">月</a></li>
+  </ul>
+</div>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    月
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/1">1月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/2">２月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/3">３月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/4">４月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/5">５月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/6">６月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/7">７月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/8">８月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/9">９月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/10">１０月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/11">１１月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/12">１２月</a></li>
+  </ul>
+</div>
+
+
+事業収入合計：<:$total_info.business_total:>円<br/>
+臨時収入合計：<:$total_info.extra_total:>円<br/>
+賞与合計：<:$total_info.bonus_total:>円<br/>
+給与所得合計：<:$total_info.income_total:>円<br/>
+その他合計：<:$total_info.other_total:>円<br/>
+合計額：<:$total_info.month_total:>円<br/>
+
+
+<br/>
+
+<canvas id="sample" height="500" width="500"></canvas>
+
+
+<script>
+ 
+ $(document).ready(function(){
+  $.ajax({
+   type: 'GET',
+   url: '/income/month/info',
+   datatype: 'json',
+   success: function(data){   
+    var properties = '';
+    for(var prop in data){
+      properties = data[prop];
+    }
+    console.log(properties);
+    var bonus = parseInt(properties.bonus_total);
+    var business = parseInt(properties.business_total);
+    var extra = parseInt(properties.extra_total);
+    var income = parseInt(properties.income_total);
+    var other =  parseInt(properties.other_total);
+    var doughnutData = [
+    {
+      value: bonus,
+      color:"#aaf2fb"
+    },
+    {
+      value: business,
+      color: "#ffb6b9" 
+    },
+    {
+     value: extra,
+     color: "#A8BECB"
+    },
+    {
+     value: income,
+     color: "#ffff00"
+    },
+    {
+     value: other,
+     color: "#ff1493"
+    }
+   ];
+ 
+    var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);
+   },
+   error: function(){
+     alert('error');
+   }
+    });
+ });
+
+$(function() {
+$("#datepicker").datepicker();
+}); 
+
+
+</script>     
+
+
+:}
+
