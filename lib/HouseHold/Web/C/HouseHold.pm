@@ -122,7 +122,8 @@ sub month_income{
  my($class,$c) = @_;
  my $month_number = $c->session->get('month_number');
  my $total_info = $c->db->get_total_month($month_number);
- return $c->render('month_income.tx',{total_info => $total_info});
+ print Dumper $month_number;
+ return $c->render('month_income.tx',{total_info => $total_info,month => $month_number});
 }
 
 sub month_expense{
@@ -195,7 +196,7 @@ sub change_password{
 #json
 sub income_week_info{
  my($class,$c) = @_;
- my $tatal_info = $c->db->get_income_infos($c->session->get('month_number'),$c->session->get('week'));
+ my $total_info = $c->db->get_income_infos($c->session->get('month_number'),$c->session->get('week'));
  print Dumper $total_info;
  my $infos = [];
   push @$infos,$total_info;

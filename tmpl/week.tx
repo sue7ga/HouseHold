@@ -36,23 +36,76 @@
   </ul>
 </div>
 
-<:$total_info.month:>月の第<:$total_info.wnum:>週
+<h2><:$total_info.month:>月の第<:$total_info.wnum:>週</h2><br/>
 
 
-給与所得合計：<:$total_info.income_total:>
-事業所得合計：<:$total_info.business_total:>
-その他合計：<:$total_info.other_total:>
-賞与合計：<:$total_info.bonus_total:>
-臨時収入合計：<:$total_info.extra_total:>
+給与所得合計：<:$total_info.income_total:>円<br/>
+事業所得合計：<:$total_info.business_total:>円<br/>
+その他合計：<:$total_info.other_total:>円<br/>
+賞与合計：<:$total_info.bonus_total:>円<br/>
+臨時収入合計：<:$total_info.extra_total:>円<br/>
 
 
 <br/>
+<canvas id="sample" height="500" width="500"></canvas>
 
 
 <script>
-
  
+ $(document).ready(function(){
+  $.ajax({
+   type: 'GET',
+   url: '/income/week/info',
+   datatype: 'json',
+   success: function(data){   
+    var properties = '';
+    for(var prop in data){
+      properties = data[prop];
+    }
+    console.log(properties);
+    var bonus = parseInt(properties.bonus_total);
+    var business = parseInt(properties.business_total);
+    var extra = parseInt(properties.extra_total);
+    var income = parseInt(properties.income_total);
+    var other =  parseInt(properties.other_total);
+    var doughnutData = [
+    {
+      value: bonus,
+      color:"#aaf2fb"
+    },
+    {
+      value: business,
+      color: "#ffb6b9" 
+    },
+    {
+     value: extra,
+     color: "#A8BECB"
+    },
+    {
+     value: income,
+     color: "#ffff00"
+    },
+    {
+     value: other,
+     color: "#ff1493"
+    }
+   ];
+ 
+    var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);
+   },
+   error: function(){
+     alert('error');
+   }
+    });
+ });
+
+$(function() {
+$("#datepicker").datepicker();
+}); 
+
+
 </script>     
+
 
 
 :}

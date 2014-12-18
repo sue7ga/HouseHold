@@ -173,8 +173,6 @@ sub get_total_expense_month{
  return $total_info;
 }
 
-
-
 sub get_expense{
  my($self,$user_id,$date) = @_;
  my $itr = $self->search('expense',+{user_id => $user_id,date => $date});

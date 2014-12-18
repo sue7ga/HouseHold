@@ -8,9 +8,10 @@
 <font color="#000000" size="2"><span style="background-color: #A8BECB">臨時収入合計</span></font>
 <font color="#000000" size="2"><span style="background-color: #aaf2fb">賞与合計</span></font>
 <font color="#000000" size="2"><span style="background-color: #ffff00">給与所得合計</span></font>
-<font color="#000000" size="2"><span style="background-color: #ff1493">その他合計</span></font>
+<font colddor="#000000" size="2"><span style="background-color: #ff1493">その他合計</span></font>
 単位:円
 
+<h2><: $month :>月</h2>
 
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -23,7 +24,7 @@
   </ul>
 </div>
 
-0<div class="dropdown">
+<div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
     月
     <span class="caret"></span>
