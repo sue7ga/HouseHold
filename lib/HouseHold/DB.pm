@@ -112,6 +112,79 @@ sub get_total_month{
  return $total_info;
 }
 
+sub get_total_week{
+ my($self,$month,$week) = @_;
+ my @expenses = $self->search('expense',+{},+{});
+ my $food_total = 0;
+ my $good_total = 0;
+ my $fare_total = 0;
+ my $society_total = 0;
+ my $entertainment_total = 0;
+ my $teaching_total = 0;
+ my $dress_total = 0;
+ my $clinic_total = 0;
+ my $communicate_total = 0;
+ my $water_total = 0;
+ my $living_total =0;
+ my $car_total = 0;
+ my $tax_total = 0;
+ my $large_consume_total = 0;
+ my $other_total = 0;
+ my $month_total = 0;
+ my $wnum;
+  for my $exp(@expenses){
+   my($dd,$mm,$yyyy) = ($exp->date =~ /(\d+)\/(\d+)\/(\d+)/);
+   if(not defined $dd || not defined $mm || not defined $yyyy){
+         next;
+   }
+   $wnum = Week_Number($yyyy,$dd,$mm); 
+   if(not defined $wnum){
+       next;
+   }
+   unless($wnum%4  == $week%4){
+       next;
+   }
+   unless($dd == $month){
+       next;
+   }
+
+   $food_total += $exp->food;  
+   $good_total += $exp->good;
+   $fare_total += $exp->fare;
+   $society_total += $exp->society;
+   $entertainment_total += $exp->entertainment;
+   $teaching_total += $exp->teaching;
+   $dress_total += $exp->dress;
+   $clinic_total += $exp->clinic;
+   $communicate_total += $exp->communicate;
+   $water_total += $exp->water;
+   $living_total += $exp->living;
+   $car_total += $exp->car;
+   $tax_total += $exp->tax;
+   $large_consume_total += $exp->large_consume;
+   $other_total += $exp->other;
+   $month_total += $exp->total;
+ }
+ my $total_info = {};
+ $total_info->{food_total} = $food_total;
+ $total_info->{good_total} = $good_total;
+ $total_info->{fare_total} = $fare_total;
+ $total_info->{society_total} = $society_total;
+ $total_info->{entertainment_total} = $entertainment_total;
+ $total_info->{teaching_total} = $teaching_total;
+ $total_info->{dress_total} = $dress_total;
+ $total_info->{clinic_total} = $clinic_total;
+ $total_info->{communicate_total} = $communicate_total;
+ $total_info->{water_total} = $water_total;
+ $total_info->{living_total} = $living_total;
+ $total_info->{car_total} = $car_total;
+ $total_info->{tax_total} = $tax_total;
+ $total_info->{large_consume_total} = $large_consume_total;
+ $total_info->{other_total} = $other_total;
+ $total_info->{month_total} = $month_total;
+ return $total_info;
+}
+
 sub get_total_expense_month{
  my($self,$num) = @_;
  my @expenses = $self->search('expense',+{},+{});
@@ -146,7 +219,7 @@ sub get_total_expense_month{
    $clinic_total += $exp->clinic;
    $communicate_total += $exp->communicate;
    $water_total += $exp->water;
-   $living_total += $exp->liveing;
+   $living_total += $exp->living;
    $car_total += $exp->car;
    $tax_total += $exp->tax;
    $large_consume_total += $exp->large_consume;

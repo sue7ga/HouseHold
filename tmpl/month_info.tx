@@ -1,0 +1,21 @@
+: cascade "include/mypage.tx"
+: override content -> {
+
+<h2><: $month :>月の分析</h2>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+   週別に見る
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/1">第１週</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/2">第２週</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/3">第３週</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/4">第４週</a></li>
+  </ul>
+</div>
+
+
+:}
+

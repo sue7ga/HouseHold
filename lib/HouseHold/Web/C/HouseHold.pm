@@ -122,27 +122,29 @@ sub month_income{
  my($class,$c) = @_;
  my $month_number = $c->session->get('month_number');
  my $total_info = $c->db->get_total_month($month_number);
- print Dumper $month_number;
  return $c->render('month_income.tx',{total_info => $total_info,month => $month_number});
 }
 
+sub expense_week_in_month{
+ my($class,$c,$args) = @_;
+ print Dumper $c->session->get('month_number');
+ print Dumper $args->{num};
+ my $total_info = $c->db->get_total_week($c->session->get('month_number'),$args->{num});
+ print Dumper $total_info;
+ return $c->render('expense_month_week.tx');
+}
+
 sub month_expense{
- my($class,$c) = @_;
- my $month_number = $c->session->get('month_number');
- my $total_info = $c->db->get_total_expense_month($month_number);
- return $c->render('month_expense.tx');
+ my($class,$c,$args) = @_;
+ print Dumper $args;
+ $c->session->set('month_number' =>$args->{num});
+ return $c->render('expense_month_week.tx');
 }
 
 sub month_number{
  my($class,$c,$args) = @_;
  $c->session->set('month_number' => $args->{number});
  return $c->redirect('/month/income');
-}
-
-sub month_expense_num{
-my($class,$c,$args) = @_;
- $c->session->set('month_number' => $args->{number});
- return $c->redirect('/expense/month/info');
 }
 
 sub expense_month_number{

@@ -9,8 +9,6 @@
     <li><a href="/expense">支出</a></li>
     </ul>
 
-
-
 <form method="post" action="/post/income">
 
 <dl>
