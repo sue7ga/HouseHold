@@ -1,0 +1,59 @@
+: cascade "include/mypage.tx"
+
+: override content -> {
+
+ <h2>分析(収入）</h2>
+
+<font color="#000000" size="2"><span style="background-color: #ffb6b9">事業収入合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #A8BECB">臨時収入合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #aaf2fb">賞与合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #ffff00">給与所得合計</span></font>
+<font color="#000000" size="2"><span style="background-color: #ff1493">その他合計</span></font>
+単位:円
+
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    分析項目
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/mypage">日</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/income">月</a></li>
+  </ul>
+</div>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+   週別に見る
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/income/1">第１週</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/income/2">第２週</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/income/3">第３週</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/income/4">第４週</a></li>
+  </ul>
+</div>
+
+<:$total_info.month:>月の第<:$total_info.wnum:>週
+
+
+給与所得合計：<:$total_info.income_total:>
+事業所得合計：<:$total_info.business_total:>
+その他合計：<:$total_info.other_total:>
+賞与合計：<:$total_info.bonus_total:>
+臨時収入合計：<:$total_info.extra_total:>
+
+
+<br/>
+
+
+<script>
+
+ 
+</script>     
+
+
+:}
+

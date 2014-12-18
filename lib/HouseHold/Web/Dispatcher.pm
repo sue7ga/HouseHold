@@ -25,7 +25,21 @@ post '/post/analytics' => "HouseHold#postanalytics";
 get 'month/:number' => "HouseHold#month_number";
 
 get '/income/month/info' => "HouseHold#income_month_info";
-#expense
+
+get '/income/week/info' => "HouseHold#income_week_info";
+
+get '/income/:number' => "HouseHold#week";
+
+get '/week/income' => "HouseHold#week_analytics";
+
+
+#expenses
+
+get 'expense/month/:num' => "HouseHold#month_expense_num";
+
+get '/expense/month/infos' => "HouseHold#expense_month_info";
+
+get 'expense/month' => "HouseHold#month_expense";
 
 get '/expense' => "HouseHold#expense";
 

@@ -108,10 +108,11 @@ sub logout{
 
 sub mypage{
  my($class,$c) = @_;
- my $date = $c->session->get('date');
+ my $date = $c->session->get('date') || '03/12/2014' ;
  my $itr = $c->db->get_total_income($date);
+ #{total => $itr->total
  if($c->session->get('userid')){ 
-   return $c->render('mypage.tx',{total => $itr->total});
+   return $c->render('mypage.tx');
 }else{
   return $c->redirect('/login');
 }
@@ -124,16 +125,49 @@ sub month_income{
  return $c->render('month_income.tx',{total_info => $total_info});
 }
 
+sub month_expense{
+ my($class,$c) = @_;
+ my $month_number = $c->session->get('month_number');
+ my $total_info = $c->db->get_total_expense_month($month_number);
+ return $c->render('month_expense.tx');
+}
+
 sub month_number{
  my($class,$c,$args) = @_;
  $c->session->set('month_number' => $args->{number});
  return $c->redirect('/month/income');
 }
 
+sub month_expense_num{
+my($class,$c,$args) = @_;
+ $c->session->set('month_number' => $args->{number});
+ return $c->redirect('/expense/month/info');
+}
+
+sub expense_month_number{
+ my($class,$c,$args) = @_;
+ $c->session->set('expense_month_number' => $args->{number});
+ return $c->redirect('/expense/month/info');
+}
+
+sub week{
+ my($class,$c,$args) = @_;
+ $c->session->set('week' => $args->{number});
+ return $c->redirect('/week/income');
+}
+
 sub postanalytics{
  my($class,$c) = @_;
  $c->session->set('date' => $c->req->parameters->{date});
  return $c->redirect('/mypage');
+}
+
+sub week_analytics{
+ my($class,$c) = @_;
+ my $month_number =  $c->session->get('month_number');
+ my $week_number  =  $c->session->get('week');
+ my $total_info = $c->db->get_income_infos($month_number,$week_number);
+ return $c->render('week.tx',{total_info => $total_info});
 }
 
 sub expense_analytics{
@@ -159,13 +193,30 @@ sub change_password{
 }
 
 #json
+sub income_week_info{
+ my($class,$c) = @_;
+ my $tatal_info = $c->db->get_income_infos($c->session->get('month_number'),$c->session->get('week'));
+ print Dumper $total_info;
+ my $infos = [];
+  push @$infos,$total_info;
+  return $c->render_json($infos);
+}
+
 sub income_month_info{
  my($class,$c) = @_;
  my $num = $c->session->get('month_number');
  my $total_info = $c->db->get_total_month($num);
  my $infos = [];
  push @$infos,$total_info;
- print Dumper $infos;
+ return $c->render_json($infos);
+}
+
+sub expense_month_info{
+ my($class,$c) = @_;
+ my $num = $c->session->get('month_number');
+ my $total_info = $c->db->get_total_expense_month($num);
+ my $infos = [];
+ push @$infos,$total_info;
  return $c->render_json($infos);
 }
 

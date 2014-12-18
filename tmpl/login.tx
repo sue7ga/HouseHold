@@ -13,6 +13,6 @@
 </form>
 <br/>
 
-<a href="/register"><button type="button" class="btn btn-default">生徒登録をする</button></a>
+<a href="/register"><button type="button" class="btn btn-default">ユーザー登録</button></a>
 
 :}
