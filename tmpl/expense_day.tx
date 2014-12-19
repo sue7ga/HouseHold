@@ -1,6 +1,7 @@
 : cascade "include/mypage.tx"
 : override content -> {
 
+
  <h2>分析(支出）</h2>
 
 <font color="#000000" size="2"><span style="background-color: #aaf2fb">車代</span></font>
@@ -19,13 +20,25 @@
 <font color="#000000" size="2"><span style="background-color: #556b2f">水道費</span></font>
 単位:円
 
+<form method="post" action="/post/expense/day">
+<dl>
+ <dt>日付</dt>
+  <dd><input type="text" id="datepicker" name="date"/></dd>
+</dl>
+
+<p><input type="submit" value="入力"></p>
+
+</form>
+
+
+
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
     分析項目
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/only/1">月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/expense">月</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/day/expense">日</a></
   </ul>
 </div>
@@ -76,7 +89,7 @@
  $(document).ready(function(){
   $.ajax({
    type: 'GET',
-   url: '/analytics/ex/json',
+   url: '/analytics/ex/day/json',
    datatype: 'json',
    success: function(data){
     var properties = '';
@@ -84,20 +97,20 @@
       properties = data[prop];
     }    
     console.log(properties);
-    var car = parseInt(properties.car_total);
-    var clinic = parseInt(properties.clinic_total);
-    var dress = parseInt(properties.dress_total);
-    var entertainment = parseInt(properties.entertainment_total);
-    var fare = parseInt(properties.fare_total);
-    var food = parseInt(properties.food_total);
-    var good = parseInt(properties.good_total);
-    var large_consume = parseInt(properties.large_consume_total);
-    var living = parseInt(properties.living_total);
-    var other = parseInt(properties.other_total);
-    var society = parseInt(properties.society_total);
-    var tax = parseInt(properties.tax_total);
-    var teaching = parseInt(properties.teaching_total);
-    var water = parseInt(properties.water_total);
+    var car = parseInt(properties.car);
+    var clinic = parseInt(properties.clinic);
+    var dress = parseInt(properties.dress);
+    var entertainment = parseInt(properties.entertainment);
+    var fare = parseInt(properties.fare);
+    var food = parseInt(properties.food);
+    var good = parseInt(properties.good);
+    var large_consume = parseInt(properties.large_consume);
+    var living = parseInt(properties.living);
+    var other = parseInt(properties.other);
+    var society = parseInt(properties.society);
+    var tax = parseInt(properties.tax);
+    var teaching = parseInt(properties.teaching);
+    var water = parseInt(properties.water);
     var doughnutData = [
     {
       value: car,
@@ -160,17 +173,17 @@
     var myDoughnut = new Chart(document.getElementById("sample").getContext("2d")).Doughnut(doughnutData);
    },
    error: function(){
-     alert('error');
    }
     });
  });
 
 $(function() {
   $("#datepicker").datepicker();
-}); 
+});
 
 
 </script>     
 
 
 :}
+o

@@ -39,9 +39,7 @@
 </form>
 
 <script>
-$(function() {
-$("#datepicker").datepicker();
-});
+$(function() { $("#datepicker").datepicker(); });
 </script>
 
 

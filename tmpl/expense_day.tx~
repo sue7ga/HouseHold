@@ -1,6 +1,7 @@
 : cascade "include/mypage.tx"
 : override content -> {
 
+
  <h2>分析(支出）</h2>
 
 <font color="#000000" size="2"><span style="background-color: #aaf2fb">車代</span></font>
@@ -19,13 +20,19 @@
 <font color="#000000" size="2"><span style="background-color: #556b2f">水道費</span></font>
 単位:円
 
+<dl>
+ <dt>日付</dt>
+  <dd><input type="text" id="datepicker" name="date"/></dd>
+</dl>
+
+
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
     分析項目
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/only/1">月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/month/expense/">月</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/day/expense">日</a></
   </ul>
 </div>
@@ -168,7 +175,6 @@
 $(function() {
   $("#datepicker").datepicker();
 }); 
-
 
 </script>     
 

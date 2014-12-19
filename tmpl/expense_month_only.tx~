@@ -21,53 +21,24 @@
 
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    分析項目
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/only/1">月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/day/expense">日</a></
-  </ul>
-</div>
-
-
-<h2><:$month:>月<:$week:>週</h2>
-
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
     月
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/1">1月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/2">２月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/3">３月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/4">４月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/5">５月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/6">６月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/1">1月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/2">２月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/3">３月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/4">４月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/5">５月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/6">６月</a></li>
     <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/7">７月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/8">８月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/9">９月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/10">１０月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/11">１１月</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/months/12">１２月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/8">８月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/9">９月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/10">１０月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/11">１１月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/12">１２月</a></li>
   </ul>
 </div>
-
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-   週別に見る
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/1">第１週</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/2">第２週</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/3">第３週</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/4">第４週</a></li>
-  </ul>
-</div>
-
-
 
 <canvas id="sample" height="500" width="500"></canvas>
 
@@ -76,7 +47,7 @@
  $(document).ready(function(){
   $.ajax({
    type: 'GET',
-   url: '/analytics/ex/json',
+   url: '/expense/month/infos',
    datatype: 'json',
    success: function(data){
     var properties = '';

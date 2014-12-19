@@ -127,18 +127,30 @@ sub month_income{
 
 sub expense_week_in_month{
  my($class,$c,$args) = @_;
- print Dumper $c->session->get('month_number');
- print Dumper $args->{num};
+ $c->session->set('week' => $args->{num});
  my $total_info = $c->db->get_total_week($c->session->get('month_number'),$args->{num});
- print Dumper $total_info;
- return $c->render('expense_month_week.tx');
+ return $c->render('expense_month_week.tx',{month => $c->session->get('month_number'),week => $c->session->get('week')});
 }
 
 sub month_expense{
  my($class,$c,$args) = @_;
- print Dumper $args;
- $c->session->set('month_number' =>$args->{num});
- return $c->render('expense_month_week.tx');
+ $c->session->set('month_number' => $args->{num});
+ my $week;
+ if($c->session->get('week') =~ /\d+/){
+   $week = $c->session->get('week');
+ }
+ return $c->render('expense_month_week.tx',{month => $c->session->get('month_number'),week => $week});
+}
+
+sub expense_day{
+ my($class,$c,$args) = @_; 
+ return $c->render('expense_day.tx');
+}
+
+sub post_expense_day{
+ my($class,$c) = @_;
+ $c->session->set('date' => $c->req->parameters->{date});
+ return $c->redirect('/day/expense');
 }
 
 sub month_number{
@@ -195,7 +207,40 @@ sub change_password{
  return $c->redirect('/settings');
 }
 
+sub month_expense_analytics{
+ my ($class,$c,$args) = @_;
+ if($args->{num} =~ /\d+/){
+  $c->session->set('month_number' => $args->{num});
+ }
+ return $c->render('expense_month_only.tx');
+}
+
 #json
+
+sub month_only{
+ my($class,$c) = @_;
+ my $total_info = $c->db->get_month_only_total($c->session->get('month_number')); 
+ my $total = [];
+ push @$total,$total_info;
+ return $c->render_json($total);
+}
+
+sub ex_week_json{
+ my($class,$c) = @_;
+ my $total_info = $c->db->get_total_week($c->session->get('month_number'),$c->session->get('week'));
+ my $total = [];
+ push @$total,$total_info;
+ return $c->render_json($total);
+}
+
+sub day_ex_json{
+ my($class,$c) = @_;
+ my $total_info = $c->db->get_total_day($c->session->get('date'));
+ my $total = [];
+ push @$total,$total_info;
+ return $c->render_json($total);
+}
+
 sub income_week_info{
  my($class,$c) = @_;
  my $total_info = $c->db->get_income_infos($c->session->get('month_number'),$c->session->get('week'));
@@ -206,6 +251,15 @@ sub income_week_info{
 }
 
 sub income_month_info{
+ my($class,$c) = @_;
+ my $num = $c->session->get('month_number');
+ my $total_info = $c->db->get_total_month($num);
+ my $infos = [];
+ push @$infos,$total_info;
+ return $c->render_json($infos);
+}
+
+sub expense_month_only{
  my($class,$c) = @_;
  my $num = $c->session->get('month_number');
  my $total_info = $c->db->get_total_month($num);

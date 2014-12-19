@@ -35,7 +35,10 @@ get '/week/income' => "HouseHold#week_analytics";
 
 #expenses
 
+#month
 get '/expense/months/:num' => "HouseHold#month_expense";
+#week
+get '/expense/:num' => "HouseHold#expense_week_in_month";
 
 get '/expense/month/info' => "HouseHold#month_info";
 
@@ -45,7 +48,11 @@ get '/expense/month' => "HouseHold#month_expense";
 
 get '/expense' => "HouseHold#expense";
 
-get '/expense/:num' => "HouseHold#expense_week_in_month";
+get '/day/expense' => "HouseHold#expense_day";
+
+get 'month/expense/:num' => "HouseHold#month_expense_analytics";
+
+post 'post/expense/day' => "HouseHold#post_expense_day";
 
 post '/post/expense' => "HouseHold#post_expense";
 
@@ -55,6 +62,15 @@ post '/post/expense/analytics' => "HouseHold#post_expense_analytics";
 
 get 'analytics/expense' => "HouseHold#analyticsexpense";
 
+get 'analytics/expense/week' => "HouseHold#expense_week_in_month";
+
+get '/expense/month/only/:num' => "HouseHold#month_expense_analytics";
+
+get '/analytics/ex/json' => "HouseHold#ex_week_json";
+
+get '/analytics/ex/day/json' => "HouseHold#day_ex_json";
+
+get '/month/only/json' => "HouseHold#month_only";
 #user
 
 get '/register' => "HouseHold#register";
