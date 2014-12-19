@@ -85,17 +85,23 @@ return $c->redirect('/register');
 
 sub login{
  my($class,$c) = @_;
- return $c->render('login.tx');
+ return $c->render('login.tx',{err_msg => $c->session->get('err_msg')});
 }
 
 sub userlogin{
  my($class,$c) = @_;
  my $param = $c->req->parameters;
  my $user = $c->db->get_user_by_email($param->{email});
+ if(not defined $user){
+   $c->session->set('err_msg'=> 'メールアドレスが間違っています');
+   return $c->redirect('/login');
+ }
  if($param->{password} eq $user->password){
    $c->session->set('userid' => $user->id);
+   $c->session->remove('err_msg');
    return $c->redirect('/mypage'); 
  }else{
+   $c->session->set('err_msg'=> 'パスワードが間違っています');
    return $c->redirect('/login');
  }
 }
@@ -120,7 +126,10 @@ sub mypage{
 
 sub month_income{
  my($class,$c) = @_;
- my $month_number = $c->session->get('month_number');
+ my $month_number;
+ if($c->session->get('month_number') =~ /\d+/){
+   $month_number = $c->session->get('month_number');
+ }
  my $total_info = $c->db->get_total_month($month_number);
  return $c->render('month_income.tx',{total_info => $total_info,month => $month_number});
 }
@@ -129,7 +138,11 @@ sub expense_week_in_month{
  my($class,$c,$args) = @_;
  $c->session->set('week' => $args->{num});
  my $total_info = $c->db->get_total_week($c->session->get('month_number'),$args->{num});
- return $c->render('expense_month_week.tx',{month => $c->session->get('month_number'),week => $c->session->get('week')});
+ my $week;
+ if($c->session->get('week') =~ /\d+/){
+  $week = $c->session->get('week')
+ }
+ return $c->render('expense_month_week.tx',{month => $c->session->get('month_number'),week => $week});
 }
 
 sub month_expense{
@@ -212,7 +225,7 @@ sub month_expense_analytics{
  if($args->{num} =~ /\d+/){
   $c->session->set('month_number' => $args->{num});
  }
- return $c->render('expense_month_only.tx');
+ return $c->render('expense_month_only.tx',{month => $c->session->get('month_number')});
 }
 
 #json

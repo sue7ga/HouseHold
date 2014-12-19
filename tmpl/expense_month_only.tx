@@ -21,6 +21,19 @@
 
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    分析項目
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/expense/month/only/1">月</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/day/expense">日</a></
+  </ul>
+</div>
+
+
+<h2><:$month:>月</h2>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
     月
     <span class="caret"></span>
   </button>
@@ -42,7 +55,7 @@
 
 <canvas id="sample" height="500" width="500"></canvas>
 
-<script>s
+<script>
  
  $(document).ready(function(){
   $.ajax({

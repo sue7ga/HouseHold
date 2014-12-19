@@ -2,6 +2,8 @@
 
 : override content -> {
 
+
+<h4><font color=#ff0000><:$err_msg:></font></h4>
 <form method="post" action="<: uri_for('user/login') :>">
 <dl>
 <dt>email</dt>
