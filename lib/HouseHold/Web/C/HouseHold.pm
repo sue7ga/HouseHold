@@ -139,20 +139,28 @@ sub expense_week_in_month{
  $c->session->set('week' => $args->{num});
  my $total_info = $c->db->get_total_week($c->session->get('month_number'),$args->{num});
  my $week;
+ my $month;
  if($c->session->get('week') =~ /\d+/){
   $week = $c->session->get('week')
  }
- return $c->render('expense_month_week.tx',{month => $c->session->get('month_number'),week => $week});
+ if($c->session->get('month_number') =~ /\d+/){
+  $month = $c->session->get('month_number');
+ }
+ return $c->render('expense_month_week.tx',{month => $month,week => $week});
 }
 
 sub month_expense{
  my($class,$c,$args) = @_;
  $c->session->set('month_number' => $args->{num});
  my $week;
+ my $month;
  if($c->session->get('week') =~ /\d+/){
    $week = $c->session->get('week');
  }
- return $c->render('expense_month_week.tx',{month => $c->session->get('month_number'),week => $week});
+ if($c->session->get('month_number') =~ /\d+/){
+  $month = $c->session->get('month_number');
+ }
+ return $c->render('expense_month_week.tx',{month => $month,week => $week});
 }
 
 sub expense_day{
@@ -225,7 +233,11 @@ sub month_expense_analytics{
  if($args->{num} =~ /\d+/){
   $c->session->set('month_number' => $args->{num});
  }
- return $c->render('expense_month_only.tx',{month => $c->session->get('month_number')});
+ my $month;
+ if($c->session->get('month_number')){
+  $month = $c->session->get('month_number');
+ }
+ return $c->render('expense_month_only.tx',{month => $montho});
 }
 
 #json
