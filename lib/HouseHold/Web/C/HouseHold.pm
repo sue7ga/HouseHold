@@ -130,14 +130,16 @@ sub month_income{
  if($c->session->get('month_number') =~ /\d+/){
    $month_number = $c->session->get('month_number');
  }
- my $total_info = $c->db->get_total_month($month_number);
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_total_month($month_number,$user_id);
  return $c->render('month_income.tx',{total_info => $total_info,month => $month_number});
 }
 
 sub expense_week_in_month{
  my($class,$c,$args) = @_;
  $c->session->set('week' => $args->{num});
- my $total_info = $c->db->get_total_week($c->session->get('month_number'),$args->{num});
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_total_week($c->session->get('month_number'),$args->{num},$user_id);
  my $week;
  my $month;
  if($c->session->get('week') =~ /\d+/){
@@ -202,7 +204,8 @@ sub week_analytics{
  my($class,$c) = @_;
  my $month_number =  $c->session->get('month_number');
  my $week_number  =  $c->session->get('week');
- my $total_info = $c->db->get_income_infos($month_number,$week_number);
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_income_infos($month_number,$week_number,$user_id);
  return $c->render('week.tx',{total_info => $total_info});
 }
 
@@ -244,7 +247,8 @@ sub month_expense_analytics{
 
 sub month_only{
  my($class,$c) = @_;
- my $total_info = $c->db->get_month_only_total($c->session->get('month_number')); 
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_month_only_total($c->session->get('month_number'),$user_id); 
  my $total = [];
  push @$total,$total_info;
  return $c->render_json($total);
@@ -252,7 +256,8 @@ sub month_only{
 
 sub ex_week_json{
  my($class,$c) = @_;
- my $total_info = $c->db->get_total_week($c->session->get('month_number'),$c->session->get('week'));
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_total_week($c->session->get('month_number'),$c->session->get('week'),$user_id);
  my $total = [];
  push @$total,$total_info;
  return $c->render_json($total);
@@ -260,7 +265,8 @@ sub ex_week_json{
 
 sub day_ex_json{
  my($class,$c) = @_;
- my $total_info = $c->db->get_total_day($c->session->get('date'));
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_total_day($c->session->get('date'),$user_id);
  my $total = [];
  push @$total,$total_info;
  return $c->render_json($total);
@@ -268,7 +274,8 @@ sub day_ex_json{
 
 sub income_week_info{
  my($class,$c) = @_;
- my $total_info = $c->db->get_income_infos($c->session->get('month_number'),$c->session->get('week'));
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_income_infos($c->session->get('month_number'),$c->session->get('week'),$user_id);
  print Dumper $total_info;
  my $infos = [];
   push @$infos,$total_info;
@@ -278,7 +285,8 @@ sub income_week_info{
 sub income_month_info{
  my($class,$c) = @_;
  my $num = $c->session->get('month_number');
- my $total_info = $c->db->get_total_month($num);
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_total_month($num,$user_id);
  my $infos = [];
  push @$infos,$total_info;
  return $c->render_json($infos);
@@ -287,7 +295,8 @@ sub income_month_info{
 sub expense_month_only{
  my($class,$c) = @_;
  my $num = $c->session->get('month_number');
- my $total_info = $c->db->get_total_month($num);
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_total_month($num,$user_id);
  my $infos = [];
  push @$infos,$total_info;
  return $c->render_json($infos);
@@ -296,7 +305,8 @@ sub expense_month_only{
 sub expense_month_info{
  my($class,$c) = @_;
  my $num = $c->session->get('month_number');
- my $total_info = $c->db->get_total_expense_month($num);
+ my $user_id = $c->session->get('userid');
+ my $total_info = $c->db->get_total_expense_month($num,$user_id);
  my $infos = [];
  push @$infos,$total_info;
  return $c->render_json($infos);

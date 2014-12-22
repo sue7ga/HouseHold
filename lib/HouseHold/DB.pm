@@ -44,8 +44,8 @@ sub get_total_income{
 }
 
 sub get_income_infos{
- my($self,$month,$week) = @_;
- my @incomes = $self->search('income',+{},+{});
+ my($self,$month,$week,$user_id) = @_;
+ my @incomes = $self->search('income',+{user_id => $user_id},+{});
  my $income_total = 0;
  my $extra_total = 0;
  my $business_total = 0;
@@ -88,8 +88,9 @@ sub get_income_infos{
 }
 
 sub get_total_month{
- my($self,$num) = @_;
- my @incomes = $self->search('income',+{},+{});
+ my($self,$num,$user_id) = @_;
+ print Dumper $user_id;
+ my @incomes = $self->search('income',+{user_id => $user_id},+{});
  my $income_total = 0;
  my $extra_total = 0;
  my $business_total = 0;
@@ -114,11 +115,9 @@ sub get_total_month{
 
 
 
-
-
 sub get_total_day{
- my($self,$date) = @_;
- my $itr = $self->single('expense',+{date => $date},+{});
+ my($self,$date,$user_id) = @_;
+ my $itr = $self->single('expense',+{date => $date,user_id => $user_id},+{});
  my $total = {};
  my $total_info = {};
  $total_info->{food} = $itr->food || 0;
@@ -140,8 +139,8 @@ sub get_total_day{
 }
 
 sub get_month_only_total{
- my($self,$month) = @_;
- my @expenses = $self->search('expense',+{},+{});
+ my($self,$month,$user_id) = @_;
+ my @expenses = $self->search('expense',+{user_id => $user_id},+{});
  my $food_total = 0;
  my $good_total = 0;
  my $fare_total = 0;
@@ -205,8 +204,8 @@ sub get_month_only_total{
 }
 
 sub get_total_week{
- my($self,$month,$week) = @_;
- my @expenses = $self->search('expense',+{},+{});
+ my($self,$month,$week,$user_id) = @_;
+ my @expenses = $self->search('expense',+{user_id =>$user_id},+{});
  my $food_total = 0;
  my $good_total = 0;
  my $fare_total = 0;
@@ -278,8 +277,8 @@ sub get_total_week{
 }
 
 sub get_total_expense_month{
- my($self,$num) = @_;
- my @expenses = $self->search('expense',+{},+{});
+ my($self,$num,$user_id) = @_;
+ my @expenses = $self->search('expense',+{user_id => $user_id},+{});
  my $food_total = 0;
  my $good_total = 0;
  my $fare_total = 0;
