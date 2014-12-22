@@ -16,7 +16,7 @@
 <dl>
 
  <dt>日付</dt>
-  <dd><input type="text" id="datepicker" name="date"/></dd>
+  <dd><input type="text" id="datepicker" name="date" class="validate required"/></dd>
  <br/><br/><br/><br/><br/><br/>
  
   <dt>食費</dt>
@@ -74,6 +74,40 @@
 $(function() {
 $("#datepicker").datepicker();
 });
+
+
+$(function(){
+ $("form").submit(function(){
+
+   $("input[type='text'].validate,textarea.validate").each(function(){
+
+    if($(this).hasClass("required")){
+        if($(this).val()==""){
+         $(this).parent().prepend("<p class='error'>必須項目です</p>");
+        }
+    }
+     
+    if($(this).hasClass("number")){
+        if(isNaN($(this).val())){
+           $(this).parent().prepend("<p class='error'>数字のみ入力可能です</p>");
+        }
+        if($(this).val() < 0){
+           $(this).parent().prepend("<p class='error'>負の値は入力できません</p>");
+        }
+    }
+  
+   });
+
+      if($("p.error").length > 0){
+        $('html,body').animate({scrollTop: $("p.error:first").offset().top-40},'slow');
+        $("p.error").parent().addClass("error");
+        return false;
+    }
+
+
+ });
+});
+
 
 </script>
 
